@@ -68,9 +68,14 @@ RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport
 {
     return @{
+             @"CacheDir" : [RNFetchBlobFS getCacheDir],
+	     @"DocumentDir": [RNFetchBlobFS getDocumentDir],
+	     @"DownloadDir" : [RNFetchBlobFS getDownloadDir],
+             @"LibraryDir" : [RNFetchBlobFS getLibraryDir],
              @"MainBundleDir" : [RNFetchBlobFS getMainBundleDir],
-             @"DocumentDir": [RNFetchBlobFS getDocumentDir],
-             @"CacheDir" : [RNFetchBlobFS getCacheDir]
+             @"MovieDir" : [RNFetchBlobFS getMovieDir],
+             @"MusicDir" : [RNFetchBlobFS getMusicDir],
+             @"PictureDir" : [RNFetchBlobFS getPictureDir],
              };
 }
 
@@ -225,6 +230,18 @@ RCT_EXPORT_METHOD(pathForAppGroup:(NSString *)groupName
         resolve(path);
     } else {
         reject(@"EUNSPECIFIED", @"could not find path for app group", nil);
+    }
+}
+
+#pragma mark - fs.syncPathAppGroup
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(syncPathAppGroup:(NSString *)groupName) {
+    NSURL *pathUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupName];
+    NSString *path = [pathUrl path];
+
+    if(path) {
+        return path;
+    } else {
+        return @"";
     }
 }
 
