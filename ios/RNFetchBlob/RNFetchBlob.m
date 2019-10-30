@@ -69,8 +69,8 @@ RCT_EXPORT_MODULE();
 {
     return @{
              @"CacheDir" : [RNFetchBlobFS getCacheDir],
-	     @"DocumentDir": [RNFetchBlobFS getDocumentDir],
-	     @"DownloadDir" : [RNFetchBlobFS getDownloadDir],
+             @"DocumentDir": [RNFetchBlobFS getDocumentDir],
+             @"DownloadDir" : [RNFetchBlobFS getDownloadDir],
              @"LibraryDir" : [RNFetchBlobFS getLibraryDir],
              @"MainBundleDir" : [RNFetchBlobFS getMainBundleDir],
              @"MovieDir" : [RNFetchBlobFS getMovieDir],
